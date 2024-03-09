@@ -10,4 +10,8 @@ public class Product {
     private Timestamp date;
     private Number price;
     private Currency currency;
+
+    public int getId() {
+        return id;
+    }
 }
