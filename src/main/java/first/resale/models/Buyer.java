@@ -1,7 +1,7 @@
 package first.resale.models;
 
 public class Buyer {
-    private int id;
-    private int userId;
+    private long id;
+    private long userId;
     private String additionalPhone;
 }

@@ -2,6 +2,7 @@ package first.resale.controller;
 
 import first.resale.models.Product;
 import first.resale.models.User;
+import first.resale.repository.ProductRepository;
 import first.resale.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,15 +16,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping("/products")
+//@RequestMapping("/products")
 public class ProductController {
 
-
-    private final ProductService productService;
     @Autowired
+    private ProductRepository productRepository;
+    //private final ProductService productService;
+    /*@Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
-    }
+    }*/
 
     @GetMapping
     public String getProductList(Model model, @AuthenticationPrincipal User user) {
