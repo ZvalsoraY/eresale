@@ -8,67 +8,57 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-//@RequestMapping("/products")
 public class ProductController {
 
+    private final ProductService productService;
     @Autowired
-    private ProductRepository productRepository;
-    //private final ProductService productService;
-    /*@Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
-    }*/
-
-    @GetMapping
-    public String getProductList(Model model, @AuthenticationPrincipal User user) {
-        /*List<Product> products = productService.listAllProducts();
-        model.addAttribute("todos", todos);
-        model.addAttribute("newTodo", new Todo());
-        return "todo";*/
-        return null;
     }
-
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public String list(Model model) {
-        model.addAttribute("products", productService.listAllProducts());
-        return "products";
-    }
-
-    @RequestMapping(value = "product/{id}", method = RequestMethod.GET)
-    public String showProduct(@PathVariable Integer id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-        return "productShow";
-    }
-
-    @RequestMapping(value = "product/edit/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-        return "productForm";
-    }
-
-    @RequestMapping(value = "product/new", method = RequestMethod.GET)
+    @GetMapping("/product/new")
     public String newProduct(Model model) {
-        model.addAttribute("product", new Product());
-        return "productform";
+        model.addAttribute("productForm", new Product());
+        return "product";
+    }
+    @PostMapping("/product/new")
+    public String newProduct(@ModelAttribute("productForm") Product productForm, Model model) {
+
+        productService.save(productForm);
+        return "redirect:/home";
     }
 
-    @RequestMapping(value = "product", method = RequestMethod.POST)
-    public String saveProduct(Product product) {
-        productService.saveProduct(product);
-        return "redirect:/product/" + product.getId();
+    @GetMapping("/product/edit/{id}")
+    public String editProduct(@PathVariable("id") long productId, Model model){
+        Product product = productService.findById(productId);
+        if (product != null){
+            model.addAttribute("productForm", product);
+            model.addAttribute("method", "edit");
+            return "product";
+        }else {
+            return "error/404";
+        }
     }
 
-    @RequestMapping(value = "product/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable Integer id) {
-        productService.deleteProduct(id);
-        return "redirect:/products";
+    @PostMapping("/product/edit/{id}")
+    public String editProduct(@PathVariable("id") long productId, @ModelAttribute("productForm") Product productForm, Model model){
+        productService.edit(productId, productForm);
+        return "redirect:/home";
+    }
+
+    @PostMapping("/product/delete/{id}")
+    public String deleteProduct(@PathVariable("id") long productId) {
+        Product product = productService.findById(productId);
+        if (product != null) {
+            productService.delete(productId);
+            return "redirect:/home";
+        } else {
+            return "error/404";
+        }
     }
 }

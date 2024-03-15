@@ -1,21 +1,34 @@
 package first.resale.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.sun.istack.NotNull;
+import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 @Entity
+@Table(name = "product")
 public class Product {
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(name = "userId")
+    @NotNull
+
     private long userId;
+    @Column(name = "title",length = 255)
+    @NotNull()
     private String title;
+    @Column(name = "description",length = 255)
+    @NotNull()
     private String description;
+    @Column(name = "datePlaced",length = 255)
+    @NotNull()
     private Timestamp datePlaced;
+    @Column(name = "price",length = 255)
+    @NotNull()
     private Number price;
+    @Column(name = "currency",length = 255)
+    @NotNull()
     private String currency;
 
     public Product() {
