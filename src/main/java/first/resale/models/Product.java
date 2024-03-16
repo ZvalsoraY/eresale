@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Product {
     @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "userId")
     @NotNull

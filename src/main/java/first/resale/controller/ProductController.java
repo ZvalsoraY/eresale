@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Controller
 public class ProductController {
@@ -58,5 +60,9 @@ public class ProductController {
         } else {
             return "error/404";
         }
+    }
+
+    private List<Product> getAllProducts(){
+        return productService.findAllByDate();
     }
 }

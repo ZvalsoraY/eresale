@@ -9,12 +9,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImplementation implements ProductService {
 
     private final ProductRepository productRepository;
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository){
+    public ProductServiceImplementation(ProductRepository productRepository){
         this.productRepository = productRepository;
     }
     @Override
@@ -42,6 +44,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findById(long id) {
         return productRepository.findById(id);
+    }
+
+    @Override
+    public List<Product> findAllByDate() {
+        return productRepository.findAllByDate();
     }
 
     @Override
