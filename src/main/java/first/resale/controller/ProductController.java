@@ -1,8 +1,7 @@
 package first.resale.controller;
 
 import first.resale.models.Product;
-import first.resale.models.User;
-import first.resale.repository.ProductRepository;
+
 import first.resale.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Controller
 public class ProductController {

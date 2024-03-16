@@ -4,6 +4,8 @@ import com.sun.istack.NotNull;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.Objects;
+
 @Entity
 @Table(name = "product")
 public class Product {
@@ -98,5 +100,18 @@ public class Product {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id && userId == product.userId && Objects.equals(title, product.title) && Objects.equals(description, product.description) && Objects.equals(datePlaced, product.datePlaced) && Objects.equals(price, product.price) && Objects.equals(currency, product.currency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userId, title, description, datePlaced, price, currency);
     }
 }
