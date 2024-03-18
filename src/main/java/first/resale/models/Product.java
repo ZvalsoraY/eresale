@@ -1,7 +1,13 @@
 package first.resale.models;
 
-import com.sun.istack.NotNull;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.sql.Timestamp;
 import java.util.Objects;

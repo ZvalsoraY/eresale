@@ -24,10 +24,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -36,33 +36,33 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity6</artifactId>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
             <version>6.2.2</version>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>2.17.0-rc1</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -80,11 +80,7 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>4.0.4</version>
         </dependency>
-        <!--<dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>jaxb2-maven-plugin</artifactId>
-            <version>2.5.0</version>
-        </dependency>-->
+
     </dependencies>
 
     <build>
@@ -95,7 +91,7 @@
                 <version>3.2.3</version>
             </plugin>
 
-            <plugin>
+<!--            <plugin>
                 <groupId>org.jvnet.jaxb</groupId>
                 <artifactId>jaxb-maven-plugin</artifactId>
                 <version>4.0.0</version>
@@ -106,37 +102,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <!--<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>2.5.0</version>
-                <executions>
-                    <execution>
-                        <id>xjc-foo</id>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                        <configuration>
-                            <sourceType>wsdl</sourceType>
-                            <sources>
-                                &lt;!&ndash; if you put path only, it will read any wsdl or xsd file &ndash;&gt;
-                                &lt;!&ndash; if you have xsd that is imported in wsdl, then make sure you point it wsdl file &ndash;&gt;
-                                <source>${project.basedir}/src/main/resources/schemas/foo.wsdl</source>
-                            </sources>
-                            <clearOutputDir>false</clearOutputDir>
-                            <packageName>foo</packageName>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    &lt;!&ndash;<dependency>
-                        <groupId>javax.activation</groupId>
-                        <artifactId>javax.activation.api</artifactId>
-                        <version>1.2.0</version>
-                    </dependency>&ndash;&gt;
-
-                </dependencies>
             </plugin>-->
 
             <plugin>

@@ -1,10 +1,7 @@
 package first.resale.controller;
 
-import first.resale.dto.CurrentCursDto;
-import first.resale.dto.CurrentCursOnceDto;
+import first.resale.dto.сurrentcurs.ObjectFactory;
 import first.resale.dto.сurrentcurs.ValCurs;
-import first.resale.service.CurrentCursClient;
-import first.resale.service.CurrentCursService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +16,7 @@ public class GetCurrentCursController {
     //private final CurrentCursService currentCursService;
     //private final CurrentCursClient currentCursClient;
     //public static final String URL = "https://cbr.ru/scripts/XML_daily.asp?date_req=23/01/2022.xml";
-    public static  String URLSTART = "https://cbr.ru/scripts/XML_daily.asp?date_req";
+    //public static  String URLSTART = "https://cbr.ru/scripts/XML_daily.asp?date_req=";
     final RestTemplate restTemplate = new RestTemplate();
 
     @GetMapping(value = "/getCourse")
@@ -50,7 +47,11 @@ public class GetCurrentCursController {
 
         return null;*/
         //}
-        ValCurs valCurs = restTemplate.getForObject(URLSTART + date + ".xml", ValCurs.class);
+
+        //String valCursS = restTemplate.getForObject(finalUrl, String.class);
+        //ObjectFactory objectFactory = restTemplate.getForObject(finalUrl, ObjectFactory.class);
+        //String finalUrl = URLSTART + date;
+        ValCurs valCurs = restTemplate.getForObject("http://cbr.ru/scripts/XML_daily.asp?date_req={date}", ValCurs.class, date);
         return valCurs;
 
     }

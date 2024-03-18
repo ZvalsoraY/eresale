@@ -4,8 +4,8 @@ import first.resale.models.Currency;
 import first.resale.models.Product;
 import first.resale.models.Role;
 import first.resale.models.User;
-import first.resale.service.ProductService;
-import first.resale.service.UserService;
+//import first.resale.service.ProductService;
+//import first.resale.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,13 @@ import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @Component
 public class StartupData implements CommandLineRunner {
-    private final UserService userService;
-    private final ProductService productService;
+//    private final UserService userService;
+//    private final ProductService productService;
 
     @Autowired
-    public StartupData(UserService userService, ProductService productService) {
-        this.userService = userService;
-        this.productService = productService;
+    public StartupData(/*UserService userService*//*, ProductService productService*/) {
+ //       this.userService = userService;
+//        this.productService = productService;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class StartupData implements CommandLineRunner {
         user.setStatus(Role.ROLE_USER.toString());
         user.setPassword("user");
 
-        userService.save(user);
+  //      userService.save(user);
     }
 
     private void adminAccount(){
@@ -62,7 +62,7 @@ public class StartupData implements CommandLineRunner {
         admin.setStatus(Role.ROLE_USER.toString());
         admin.setPassword("admin");
 
-        userService.save(admin);
+  //      userService.save(admin);
     }
 
     private void exampleProducts(){
@@ -85,7 +85,7 @@ public class StartupData implements CommandLineRunner {
         product1.setPrice(PRICE);
         product1.setCurrency(CURRENCY);
 
-        productService.save(product1);
+//        productService.save(product1);
 
     }
 }
