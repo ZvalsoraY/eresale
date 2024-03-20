@@ -1,6 +1,8 @@
 package first.resale.controller;
 
-import first.resale.dto.сurrentcurs.ObjectFactory;
+//import first.resale.dto.сurrentcurs.ObjectFactory;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import first.resale.dto.сurrentcurs.ValCurs;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,6 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import java.io.StringReader;
 import java.util.List;
 
 @RestController
@@ -21,7 +26,7 @@ public class GetCurrentCursController {
 
     @GetMapping(value = "/getCourse")
     @ResponseBody
-    public ValCurs getCourse(@RequestParam String date) {
+    public ValCurs getCourse(@RequestParam String date) throws JsonProcessingException, JAXBException {
         //URL = "https://cbr.ru/scripts/XML_daily.asp?date_req=23/01/2022.xml";
         //return currentCursService.findCourseInfo().toString();
         //return currentCursClient.getCourses().toString();
@@ -51,8 +56,10 @@ public class GetCurrentCursController {
         //String valCursS = restTemplate.getForObject(finalUrl, String.class);
         //ObjectFactory objectFactory = restTemplate.getForObject(finalUrl, ObjectFactory.class);
         //String finalUrl = URLSTART + date;
-        ValCurs valCurs = restTemplate.getForObject("http://cbr.ru/scripts/XML_daily.asp?date_req={date}", ValCurs.class, date);
-        return valCurs;
+        String response = restTemplate.getForObject("http://cbr.ru/scripts/XML_daily.asp?date_req={date}", String.class, date);
+        JAXBContext context = JAXBContext.newInstance(ValCurs.class);
+        return (ValCurs) context.createUnmarshaller()
+                .unmarshal(new StringReader(response));
 
     }
 }
