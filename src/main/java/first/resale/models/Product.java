@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
     @Column(name = "id")
     @Id

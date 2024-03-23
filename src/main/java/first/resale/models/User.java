@@ -7,109 +7,69 @@ import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
-    @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Column(name = "name")
-    @NotNull
-    private String name;
-    @Column(name = "patronymic")
-    @NotNull
-    private String patronymic;
-    @Column(name = "surname")
-    @NotNull
-    private String surname;
-    @Column(name = "birthDay")
-    @NotNull
-    private Date birthDay;
-    @Column(name = "phoneNumber")
-    @NotNull
-    private String phoneNumber;
-    @Column(name = "status")
-    @NotNull
-    private String status;
-    @Column(name = "password")
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Long id;
+    @Column(name = "user_name", length = 255, unique = true, nullable = false)
+    private String userName;
+    @Column(name = "password", length = 255, nullable = false)
     private String password;
+    @Column(name = "name", length = 255)
+    private String name;
+    @Column(name = "phone_number", length = 255)
+    private String phoneNumber;
 
     public User() {
     }
 
-    public User(long id, String name, String patronymic, String surname, Date birthDay, String phoneNumber, String status, String password) {
+    public User(Long id, String userName, String password, String name, String phoneNumber) {
         this.id = id;
-        this.name = name;
-        this.patronymic = patronymic;
-        this.surname = surname;
-        this.birthDay = birthDay;
-        this.phoneNumber = phoneNumber;
-        this.status = status;
+        this.userName = userName;
         this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getPatronymic() {
-        return patronymic;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public Date getBirthDay() {
-        return birthDay;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getStatus() {
-        return status;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
