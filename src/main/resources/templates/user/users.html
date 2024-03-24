@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="/static/style.css" th:href="@{/style.css}">
     <meta charset="UTF-8">
     <title>Users</title>
 </head>
@@ -10,24 +11,20 @@
     <thead>
     <tr>
         <th>ID</th>
+        <th>User Name</th>
+        <th>Password</th>
         <th>Name</th>
-        <th>Patronymic</th>
-        <th>Surname</th>
-        <th>Date of Birth</th>
         <th>Phone number</th>
-        <th>Status</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="user: ${users}">
         <td th:href="@{/user/{id}(id=${user.getId()})}"
                 th:text="${user.id}">id</td>
-        <td th:text="${user.name}">name</td>
-        <td th:text="${user.patronymic}">patronymic</td>
-        <td th:text="${user.surname}">surname</td>
-        <td th:text="${user.birthDate}">birthDate</td>
+        <td th:text="${user.userName}">name</td>
+        <td th:text="${user.password}">patronymic</td>
+        <td th:text="${user.Name}">surname</td>
         <td th:text="${user.phoneNumber}">phoneNumber</td>
-        <td th:text="${user.status.value}">status</td>
 
         <td>
             <a th:href="@{/user/{id}(id=${user.getId()})}">details</a>
@@ -36,6 +33,13 @@
     </tr>
     </tbody>
 </table>
-<a href="/user/newUser">Create user</a>
+<form th:action="@{/users/create}" th:method="get">
+    <button>Create new user</button>
+</form>
+<form th:action="@{/}" th:method="get">
+    <button>Home</button>
+</form>
+
+<a href="/users/create">Create user</a>
 </body>
 </html>

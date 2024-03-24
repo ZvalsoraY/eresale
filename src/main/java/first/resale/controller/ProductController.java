@@ -1,67 +1,50 @@
-//package first.resale.controller;
-//
-//import first.resale.models.Product;
-//
-//import first.resale.service.ProductService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//
-//
-//@Controller
-//public class ProductController {
-//
-//    //private final ProductService productService;
-//    //@Autowired
-//    public ProductController(ProductService productService) {
-//        //this.productService = productService;
+package first.resale.controller;
+
+import first.resale.models.Product;
+
+import first.resale.service.ProductService;
+import first.resale.service.UserService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+
+
+
+@Controller
+@RequestMapping("products")
+public class ProductController {
+    private final UserService userService;
+    private final ProductService productService;
+
+    public ProductController(UserService userService, ProductService productService) {
+        this.userService = userService;
+        this.productService = productService;
+    }
+    @GetMapping
+    public String getProducts(Model model) {
+        //model.addAttribute("users", userService.getUsers());
+        model.addAttribute("products", productService.getProducts());
+        return "/product/products";
+    }
+
+//    @GetMapping("/create")
+//    public String showCreatePage(Model model) {
+//        model.addAttribute("users", userService.getUsers());
+//        model.addAttribute("product", new Product());
+//        return "/product/create";
 //    }
-//    @GetMapping("/product/new")
-//    public String newProduct(Model model) {
-//        model.addAttribute("productForm", new Product());
-//        return "product";
-//    }
-//    @PostMapping("/product/new")
-//    public String newProduct(@ModelAttribute("productForm") Product productForm, Model model) {
-//
-//        //productService.save(productForm);
-//        return "redirect:/home";
-//    }
-//
-//    @GetMapping("/product/edit/{id}")
-//    public String editProduct(@PathVariable("id") long productId, Model model){
-////        Product product = productService.findById(productId);
-////        if (product != null){
-////            model.addAttribute("productForm", product);
-////            model.addAttribute("method", "edit");
-////            return "product";
-////        }else {
-//            return "error/404";
-////        }
+//    @PostMapping
+//    public String createProduct(@ModelAttribute Product product) {
+//        productService.saveProduct(product);
+//        return "redirect:/products";
 //    }
 //
-//    @PostMapping("/product/edit/{id}")
-//    public String editProduct(@PathVariable("id") long productId, @ModelAttribute("productForm") Product productForm, Model model){
-////        productService.edit(productId, productForm);
-//        return "redirect:/home";
+//    @DeleteMapping("/{id}")
+//    public String deleteProduct(@PathVariable Long id) {
+//        productService.deleteProduct(id);
+//        return "redirect:/products";
 //    }
-//
-//    @PostMapping("/product/delete/{id}")
-//    public String deleteProduct(@PathVariable("id") long productId) {
-////        Product product = productService.findById(productId);
-////        if (product != null) {
-////            productService.delete(productId);
-////            return "redirect:/home";
-////        } else {
-//            return "error/404";
-////        }
-//    }
-//
-////    private List<Product> getAllProducts(){
-////        return productService.findAllByDate();
-//
-////    }
-//}
+
+
+}

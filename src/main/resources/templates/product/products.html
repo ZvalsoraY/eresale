@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/static/style.css" th:href="@{/style.css}">
+  <meta charset="UTF-8">
+  <title>Products</title>
+</head>
+<body>
+<h1>Products list</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>userId</th>
+<!--    <th>Price</th>-->
+    <th>Currency</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="product: ${products}">
+    <td th:href="@{/product/{id}(id=${product.getId()})}"
+        th:text="${product.id}">id</td>
+    <td th:text="${product.name}">name</td>
+    <td th:text="${product.description}">description</td>
+    <td th:text="${product.userId}">userId</td>
+<!--    <td th:text="${product.price}">price</td>-->
+    <td th:text="${product.currency}">currency</td>
+
+<!--    <td>-->
+<!--      <a th:href="@{/product/{id}(id=${product.getId()})}">details</a>-->
+<!--    </td>-->
+
+  </tr>
+  </tbody>
+</table>
+<a href="/product/newProduct">Create new product</a>
+</body>
+</html>

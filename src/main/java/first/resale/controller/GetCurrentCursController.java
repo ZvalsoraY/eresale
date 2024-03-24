@@ -27,35 +27,7 @@ public class GetCurrentCursController {
     @GetMapping(value = "/getCourse")
     @ResponseBody
     public ValCurs getCourse(@RequestParam String date) throws JsonProcessingException, JAXBException {
-        //URL = "https://cbr.ru/scripts/XML_daily.asp?date_req=23/01/2022.xml";
-        //return currentCursService.findCourseInfo().toString();
-        //return currentCursClient.getCourses().toString();
 
-        //public static final String URL = "https://cbr.ru/scripts/XML_daily.asp?date_req=23/01/2022.xml";
-
-        //final RestTemplate restTemplate = new RestTemplate();
-
-
-        //public List<CurrentCursOnceDto> getCourses() {
-         /*   CurrentCursDto response = restTemplate.getForObject(URL, CurrentCursDto.class);
-
-        if (response != null) {
-            response
-                    .getValute()
-                    .forEach(x -> {
-                        x.setValue(Double.parseDouble(x.get_Value().replace(",", ".")));
-                        System.out.println(x);
-                    });
-
-            return response.getValute().toString();
-        }
-
-        return null;*/
-        //}
-
-        //String valCursS = restTemplate.getForObject(finalUrl, String.class);
-        //ObjectFactory objectFactory = restTemplate.getForObject(finalUrl, ObjectFactory.class);
-        //String finalUrl = URLSTART + date;
         String response = restTemplate.getForObject("http://cbr.ru/scripts/XML_daily.asp?date_req={date}", String.class, date);
         JAXBContext context = JAXBContext.newInstance(ValCurs.class);
         return (ValCurs) context.createUnmarshaller()
