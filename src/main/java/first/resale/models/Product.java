@@ -15,28 +15,27 @@ import java.util.Objects;
 @Entity
 @Table(name = "products")
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long id;
-    @Column(name = "name",length = 255)
-    private String name;
-    @Column(name = "description",length = 500)
+    @Column(name = "product_name",length = 255, nullable = false)
+    private String productName;
+    @Column(name = "description",length = 500, nullable = false)
     private String description;
-    @Column(name = "userId")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
     @Column(name = "price")
-    private Number price;
+    private Float price;
     @Column(name = "currency",length = 255)
     private String currency;
 
     public Product() {
     }
 
-    public Product(Long id, String name, String description, Long userId, Number price, String currency) {
+    public Product(Long id, String productName, String description, Long userId, Float price, String currency) {
         this.id = id;
-        this.name = name;
+        this.productName = productName;
         this.description = description;
         this.userId = userId;
         this.price = price;
@@ -51,12 +50,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getDescription() {
@@ -75,11 +74,11 @@ public class Product {
         this.userId = userId;
     }
 
-    public Number getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Number price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

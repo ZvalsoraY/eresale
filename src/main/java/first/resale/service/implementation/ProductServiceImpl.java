@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
     public void updateProduct(Long id, Product updatedProduct) {
         updatedProduct.setId(id);
         var product = productRepository.findById(id).get();
-        updatedProduct.setName(product.getName());
+        updatedProduct.setProductName(product.getProductName());
         updatedProduct.setDescription(product.getDescription());
         updatedProduct.setUserId(product.getId());
         updatedProduct.setPrice(product.getPrice());

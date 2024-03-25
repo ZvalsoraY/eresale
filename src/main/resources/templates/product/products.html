@@ -22,7 +22,7 @@
   <tr th:each="product: ${products}">
     <td th:href="@{/product/{id}(id=${product.getId()})}"
         th:text="${product.id}">id</td>
-    <td th:text="${product.name}">name</td>
+    <td th:text="${product.productName}">productName</td>
     <td th:text="${product.description}">description</td>
     <td th:text="${product.userId}">userId</td>
 <!--    <td th:text="${product.price}">price</td>-->
@@ -35,6 +35,9 @@
   </tr>
   </tbody>
 </table>
-<a href="/product/newProduct">Create new product</a>
+<form th:action="@{/products/create}" th:method="get">
+  <button>Create new product</button>
+</form>
+
 </body>
 </html>
