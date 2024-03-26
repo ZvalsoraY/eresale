@@ -39,8 +39,12 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public List<Deal> getDealsByUserId(Long userId) {
-        return dealRepository.findByUserId(userId);
+    public List<Deal> getDealsBySellerId(Long sellerId) {
+        return dealRepository.findBySellerId(sellerId);
+    }
+    @Override
+    public List<Deal> getDealsByBuyerId(Long buyerId) {
+        return dealRepository.findByBuyerId(buyerId);
     }
 
     @Override
@@ -53,17 +57,18 @@ public class DealServiceImpl implements DealService {
         }
     }
 
-//    @Override
-//    public void updateProduct(Long id, Product updatedProduct) {
-//        updatedProduct.setId(id);
-//        var product = productRepository.findById(id).get();
-//        updatedProduct.setProductName(product.getProductName());
-//        updatedProduct.setDescription(product.getDescription());
-//        updatedProduct.setUserId(product.getId());
-//        updatedProduct.setPrice(product.getPrice());
-//        updatedProduct.setCurrency(product.getCurrency());
-//        productRepository.save(updatedProduct);
-//    }
+    @Override
+    public void updateDeal(Long id, Deal updatedDeal) {
+        updatedDeal.setId(id);
+        var deal = dealRepository.findById(id).get();
+        updatedDeal.setSellerId(deal.getSellerId());
+        updatedDeal.setBuyerId(deal.getBuyerId());
+        updatedDeal.setProductId(deal.getProductId());
+        updatedDeal.setDealDate(deal.getDealDate());
+        updatedDeal.setDealPrice(deal.getDealPrice());
+        updatedDeal.setCurrency(deal.getCurrency());
+        dealRepository.save(updatedDeal);
+    }
 
     @Override
     public void deleteDeal(Long id) {
