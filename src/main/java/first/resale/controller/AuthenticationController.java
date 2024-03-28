@@ -53,12 +53,13 @@ public class AuthenticationController {
      */
     @PostMapping("/registerUser")
     public String registerUser(@ModelAttribute User user) {
-        if (user != null) {
-            userService.saveUser(user);
-            roleRepository.save(new Role(roleRepository.findAll().stream().count() + 1,);
-            return "redirect:;
-        } else {
-            return "redirect:/authentication/registration-error";
-        }
+        return "redirect:/authentication/registration-error";
+//        if (user != null) {
+//            userService.saveUser(user);
+//            roleRepository.save(new Role(roleRepository.findAll().stream().count() + 1,);
+//            return "redirect:;
+//        } else {
+//            return "redirect:/authentication/registration-error";
+//        }
     }
 }

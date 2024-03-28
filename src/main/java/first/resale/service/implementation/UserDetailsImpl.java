@@ -2,15 +2,13 @@ package first.resale.service.implementation;
 
 import first.resale.models.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Collections;
 
 @Component
-public class UserDetailsImpl  implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
     private final User user;
 
     public UserDetailsImpl(User user) {
@@ -19,7 +17,8 @@ public class UserDetailsImpl  implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(user.get().toString()));
+        return null;
+//        return Collections.singletonList(new SimpleGrantedAuthority(user.get().toString()));
     }
 
     @Override

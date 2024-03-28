@@ -1,7 +1,11 @@
 package first.resale.models;
 
-import jakarta.persistence.*;
-import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +25,7 @@ public class Deal {
     private LocalDateTime dealDate;
     @Column(name = "deal_price")
     private Float dealPrice;
-    @Column(name = "currency",length = 255)
+    @Column(name = "currency", length = 255)
     private String currency;
 
     public Deal() {

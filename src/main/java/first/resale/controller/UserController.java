@@ -2,11 +2,17 @@ package first.resale.controller;
 
 import first.resale.models.User;
 import first.resale.service.UserService;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -32,8 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUser(Model model, @PathVariable Long id,
-                          HttpServletResponse response) {
+    public String getUser(Model model, @PathVariable Long id, HttpServletResponse response) {
 
         var user = userService.getUserById(id);
         model.addAttribute("user", user);

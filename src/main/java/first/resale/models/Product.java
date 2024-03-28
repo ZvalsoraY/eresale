@@ -1,16 +1,11 @@
 package first.resale.models;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import org.antlr.v4.runtime.misc.NotNull;
-
-import java.sql.Timestamp;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "products")
@@ -19,15 +14,15 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long id;
-    @Column(name = "product_name",length = 255, nullable = false)
+    @Column(name = "product_name", length = 255, nullable = false)
     private String productName;
-    @Column(name = "description",length = 500, nullable = false)
+    @Column(name = "description", length = 500, nullable = false)
     private String description;
     @Column(name = "user_id", nullable = false)
     private Long userId;
     @Column(name = "price")
     private Float price;
-    @Column(name = "currency",length = 255)
+    @Column(name = "currency", length = 255)
     private String currency;
 
     public Product() {
