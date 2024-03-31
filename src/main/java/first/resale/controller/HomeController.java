@@ -1,6 +1,5 @@
 package first.resale.controller;
 
-//import first.resale.service.ProductService;
 import first.resale.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

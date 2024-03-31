@@ -7,7 +7,12 @@ import first.resale.service.ProductService;
 import first.resale.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("deals")
@@ -22,6 +27,7 @@ public class DealController {
         this.userService = userService;
         this.productService = productService;
     }
+
     @GetMapping
     public String getDeals(Model model) {
         model.addAttribute("deals", dealService.getDeals());
@@ -37,6 +43,7 @@ public class DealController {
         model.addAttribute("currencies", Currency.values());
         return "/product/create";
     }
+
     @PostMapping
     public String createProduct(@ModelAttribute Product product) {
         productService.saveProduct(product);

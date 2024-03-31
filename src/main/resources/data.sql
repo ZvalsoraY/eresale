@@ -1,14 +1,3 @@
---INSERT INTO Users (user_name, password, name, phone_number, role)
---VALUES ('admin','admin','admin','8000000', 'ROLE_ADMIN'),
---('user','user','user','7000000', 'ROLE_USER');
-
---INSERT INTO Roles (role_name, description)
---VALUES ('ROLE_ADMIN', 'ADMIN'),
---('ROLE_USER', 'USER');
---
---INSERT INTO UsersRoles (userUR_id, roleUR_id)
---VALUES (1, 1),
---(2, 2);
 
 INSERT INTO Users (user_name, password, name, phone_number, role)
 VALUES ('admin','admin','admin','8000000', 'ADMIN'),

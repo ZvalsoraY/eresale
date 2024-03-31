@@ -1,5 +1,6 @@
 package first.resale.controller;
 
+import first.resale.models.Role;
 import first.resale.models.User;
 import first.resale.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -48,7 +49,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return "redirect:/user";
+        return "redirect:/users";
     }
 
     @PutMapping("/{id}")
@@ -57,14 +58,10 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @GetMapping("/managerPanel")
-    public String showManagerPanel() {
-        return "/user/managerPanel";
-    }
-
     @GetMapping("/create")
     public String showCreatePage(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("roles", Role.values());
         return "/user/create";
     }
 
