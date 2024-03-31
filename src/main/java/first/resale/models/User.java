@@ -22,16 +22,19 @@ public class User {
     private String name;
     @Column(name = "phone_number", length = 255)
     private String phoneNumber;
+    @Column(name = "role", length = 255)
+    private String role;
 
     public User() {
     }
 
-    public User(Long id, String userName, String password, String name, String phoneNumber) {
+    public User(Long id, String userName, String password, String name, String phoneNumber, String role) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
     public Long getId() {
@@ -72,5 +75,13 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

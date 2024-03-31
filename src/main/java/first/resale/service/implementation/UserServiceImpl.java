@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     public User getUserByUserName(String username) {
         var user = userRepository.findByUserName(username);
         if (user != null) {
-            return user.get();
+            return user;
         } else {
             throw new NoSuchElementException("User not found.");
         }
