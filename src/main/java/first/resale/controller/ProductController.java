@@ -1,11 +1,13 @@
 package first.resale.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import first.resale.models.Currency;
 import first.resale.models.Deal;
 import first.resale.models.Product;
 import first.resale.service.DealService;
 import first.resale.service.ProductService;
 import first.resale.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,9 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.xml.bind.JAXBException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("products")
@@ -28,19 +33,31 @@ public class ProductController {
     private final UserService userService;
     private final ProductService productService;
     private final DealService dealService;
+    private final GetCurrentCursController getCurrentCursController;
+    public String getCursToRubByName(String name) throws JAXBException, JsonProcessingException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return getCurrentCursController.getCourse(formatter.format(LocalDateTime.now()).toString())
+                .getValute().stream().filter(cur -> cur.getCharCode().equals(name))
+                .map(inf -> inf.getVunitRate()).findFirst().get();
+    }
 
-    public ProductController(UserService userService, ProductService productService, DealService dealService) {
+    public ProductController(UserService userService, ProductService productService, DealService dealService,
+                             GetCurrentCursController getCurrentCursController) {
         this.userService = userService;
         this.productService = productService;
         this.dealService = dealService;
+        this.getCurrentCursController = getCurrentCursController;
     }
 
     @GetMapping
-    public String getProducts(Model model) {
+    public String getProducts(Model model) throws JAXBException, JsonProcessingException {
         model.addAttribute("users", userService.getUsers());
         model.addAttribute("products", productService.getProducts());
+        model.addAttribute("USD", getCursToRubByName("USD"));
+        model.addAttribute("CNY", getCursToRubByName("CNY"));
         return "/product/products";
     }
+
 
     @GetMapping("/create")
     public String showCreatePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
@@ -68,7 +85,7 @@ public class ProductController {
         currentDeal.setId(currentId.getAsLong() + 1);
         currentDeal.setProductId(productId);
         currentDeal.setBuyerId(currentUserId);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         currentDeal.setDealDate(LocalDateTime.now());
         currentDeal.setDealPrice(currentProduct.getPrice());
         currentDeal.setCurrency(currentProduct.getCurrency());

@@ -1,8 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="/static/style.css" th:href="@{/style.css}">
   <meta charset="UTF-8">
+  <title th:text="${title}"></title>
   <style>
     body, html {
       height: 100%;
@@ -15,7 +15,6 @@
       text-align: center;
     }
   </style>
-  <title th:text="${title}"></title>
 </head>
 <body>
 <div>

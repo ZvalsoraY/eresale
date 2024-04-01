@@ -15,13 +15,14 @@ import java.io.StringReader;
 
 @RestController
 public class GetCurrentCursController {
-    final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
+    private static final String cbrUrl = "http://cbr.ru/scripts/XML_daily.asp?date_req={date}";
 
     @GetMapping(value = "/getCourse")
     @ResponseBody
     public ValCurs getCourse(@RequestParam String date) throws JsonProcessingException, JAXBException {
 
-        String response = restTemplate.getForObject("http://cbr.ru/scripts/XML_daily.asp?date_req={date}", String.class, date);
+        String response = restTemplate.getForObject(cbrUrl, String.class, date);
         JAXBContext context = JAXBContext.newInstance(ValCurs.class);
         return (ValCurs) context.createUnmarshaller()
                 .unmarshal(new StringReader(response));

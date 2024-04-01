@@ -4,8 +4,28 @@
   <link rel="stylesheet" href="/static/style.css" th:href="@{/style.css}">
   <meta charset="UTF-8">
   <title>Products</title>
+  <style>
+    /* Styles for exchange rates */
+    .exchange-rates {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+<!--      background-color: #f5f5f5;-->
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+   </style>
 </head>
 <body>
+<div class="exchange-rates">
+  <h3>Exchange Rates</h3>
+  <ul>
+    <li><strong>USD:</strong> <span th:text="${USD}"></span></li>
+    <li><strong>CNY:</strong> <span th:text="${CNY}"></span></li>
+  </ul>
+</div>
+
 <h1>Products list</h1>
 <table>
   <thead>
@@ -33,10 +53,6 @@
         <button type="submit">Buy</button>
       </form>
     </td>
-<!--    <td>-->
-<!--      <a th:href="@{/product/{id}(id=${product.getId()})}">details</a>-->
-<!--    </td>-->
-
   </tr>
   </tbody>
 </table>
