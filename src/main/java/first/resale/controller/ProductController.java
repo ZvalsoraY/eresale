@@ -33,7 +33,7 @@ public class ProductController {
 
     public String getCursToRubByName(String name) throws JAXBException, JsonProcessingException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return getCurrentCursController.getCourse(formatter.format(LocalDateTime.now()).toString())
+        return getCurrentCursController.getCourse(formatter.format(LocalDateTime.now()))
                 .getValute().stream().filter(cur -> cur.getCharCode().equals(name))
                 .map(inf -> inf.getVunitRate()).findFirst().get();
     }
