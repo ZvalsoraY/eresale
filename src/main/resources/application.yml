@@ -6,6 +6,10 @@ spring:
     password: 1234
     hikari:
       maximum-pool-size: 5
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
 
 #  jpa:
 #    hibernate:

@@ -25,8 +25,11 @@
         <td th:text="${user.password}">patronymic</td>
         <td th:text="${user.Name}">surname</td>
         <td th:text="${user.phoneNumber}">phoneNumber</td>
-        <td th:action="@{/users/{id}(id=${user.id})}" th:method="delete">
-                <button>Delete</button>
+        <td>
+            <form th:action="@{/users/{id}(id=${user.id})}" th:method="delete">
+                <input type="hidden" name="deleteUser" value="${user.id}" />
+                <button type="submit">Delete</button>
+            </form>
         </td>
     </tr>
     </tbody>
@@ -37,7 +40,5 @@
 <form th:action="@{/}" th:method="get">
     <button>Home</button>
 </form>
-
-<!--<a href="/users/create">Create user</a>-->
 </body>
 </html>
