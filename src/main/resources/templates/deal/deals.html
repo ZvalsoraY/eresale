@@ -1,44 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="/static/style.css" th:href="@{/style.css}">
-  <meta charset="UTF-8">
-  <title>Deals</title>
+    <link rel="stylesheet" href="/static/style.css" th:href="@{/style.css}">
+    <meta charset="UTF-8">
+    <title>Deals</title>
 </head>
 <body>
 <h1>Deals list</h1>
 <table>
-  <thead>
-  <tr>
-    <th>Seller ID</th>
-    <th>Buyer ID</th>
-    <th>Product ID</th>
-    <th>Deal date</th>
-    <th>Deal price</th>
-    <th>Currency</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="deal: ${deals}">
-    <td th:href="@{/deal/{id}(id=${deal.getId()})}"
-        th:text="${deal.id}">id</td>
-    <td th:text="${deal.sellerId}">sellerId</td>
-    <td th:text="${deal.buyerId}">buyerId</td>
-    <td th:text="${deal.productId}">productId</td>
-    <td th:text="${deal.dealDate}">dealDate</td>
-    <td th:text="${deal.dealPrice}">dealPrice</td>
-    <td th:text="${deal.currency}">currency</td>
-
-<!--    <td>-->
-<!--      <a th:href="@{/product/{id}(id=${product.getId()})}">details</a>-->
-<!--    </td>-->
-
-  </tr>
-  </tbody>
+    <thead>
+    <tr>
+        <th>Seller ID</th>
+        <th>Buyer ID</th>
+        <th>Product ID</th>
+        <th>Deal date</th>
+        <th>Deal price</th>
+        <th>Currency</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="deal: ${deals}">
+        <td th:href="@{/deal/{id}(id=${deal.getId()})}"
+            th:text="${deal.id}">id
+        </td>
+        <td th:text="${deal.sellerId}">sellerId</td>
+        <td th:text="${deal.buyerId}">buyerId</td>
+        <td th:text="${deal.productId}">productId</td>
+        <td th:text="${deal.dealDate}">dealDate</td>
+        <td th:text="${deal.dealPrice}">dealPrice</td>
+        <td th:text="${deal.currency}">currency</td>
+    </tr>
+    </tbody>
 </table>
-<form th:action="@{/deals/create}" th:method="get">
-  <button>Create new deal</button>
-</form>
 
 </body>
 </html>

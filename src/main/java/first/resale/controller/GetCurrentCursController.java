@@ -24,8 +24,7 @@ public class GetCurrentCursController {
 
         String response = restTemplate.getForObject(cbrUrl, String.class, date);
         JAXBContext context = JAXBContext.newInstance(ValCurs.class);
-        return (ValCurs) context.createUnmarshaller()
-                .unmarshal(new StringReader(response));
+        return (ValCurs) context.createUnmarshaller().unmarshal(new StringReader(response));
 
     }
 }

@@ -15,8 +15,7 @@ public class DealController {
     private final UserService userService;
     private final ProductService productService;
 
-    public DealController(UserService userService, ProductService productService,
-                          DealService dealService) {
+    public DealController(UserService userService, ProductService productService, DealService dealService) {
         this.dealService = dealService;
         this.userService = userService;
         this.productService = productService;

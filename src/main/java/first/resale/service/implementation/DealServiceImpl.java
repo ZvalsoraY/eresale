@@ -1,12 +1,10 @@
 package first.resale.service.implementation;
 
 import first.resale.models.Deal;
-import first.resale.models.Product;
 import first.resale.repository.DealRepository;
 import first.resale.repository.ProductRepository;
 import first.resale.repository.UserRepository;
 import first.resale.service.DealService;
-import first.resale.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,9 +16,9 @@ public class DealServiceImpl implements DealService {
     private final DealRepository dealRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
-    //@Autowired
+
     public DealServiceImpl(ProductRepository productRepository, UserRepository userRepository,
-                           DealRepository dealRepository){
+                           DealRepository dealRepository) {
         this.dealRepository = dealRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
@@ -42,6 +40,7 @@ public class DealServiceImpl implements DealService {
     public List<Deal> getDealsBySellerId(Long sellerId) {
         return dealRepository.findBySellerId(sellerId);
     }
+
     @Override
     public List<Deal> getDealsByBuyerId(Long buyerId) {
         return dealRepository.findByBuyerId(buyerId);

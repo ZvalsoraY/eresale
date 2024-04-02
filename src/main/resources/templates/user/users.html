@@ -20,14 +20,15 @@
     <tbody>
     <tr th:each="user: ${users}">
         <td th:href="@{/user/{id}(id=${user.getId()})}"
-                th:text="${user.id}">id</td>
+            th:text="${user.id}">id
+        </td>
         <td th:text="${user.userName}">name</td>
         <td th:text="${user.password}">patronymic</td>
         <td th:text="${user.Name}">surname</td>
         <td th:text="${user.phoneNumber}">phoneNumber</td>
         <td>
             <form th:action="@{/users/{id}(id=${user.id})}" th:method="delete">
-                <input type="hidden" name="deleteUser" value="${user.id}" />
+                <input type="hidden" name="deleteUser" value="${user.id}"/>
                 <button type="submit">Delete</button>
             </form>
         </td>

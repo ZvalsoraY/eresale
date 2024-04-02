@@ -38,13 +38,13 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/{id}")
+/*    @GetMapping("/{id}")
     public String getUser(Model model, @PathVariable Long id, HttpServletResponse response) {
 
         var user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "/user/profile";
-    }
+    }*/
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Long id) {
@@ -52,11 +52,11 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @PutMapping("/{id}")
+/*    @PutMapping("/{id}")
     public String updateUser(@PathVariable Long id, @ModelAttribute User user) {
         userService.updateUser(id, user);
         return "redirect:/user";
-    }
+    }*/
 
     @GetMapping("/create")
     public String showCreatePage(Model model) {
@@ -65,10 +65,10 @@ public class UserController {
         return "/user/create";
     }
 
-    @GetMapping("/{id}/update")
+/*    @GetMapping("/{id}/update")
     public String showUpdatePage(Model model, @PathVariable Long id) {
         var user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "/user/update";
-    }
+    }*/
 }

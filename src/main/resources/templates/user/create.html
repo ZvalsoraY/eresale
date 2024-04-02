@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="/static/styles.css">
-  <meta charset="UTF-8">
-  <title>Create User</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <meta charset="UTF-8">
+    <title>Create User</title>
 </head>
 <body>
 <div>
-  <h1>Create User</h1>
-  <form th:action="@{/users}" th:method="POST" th:object="${user}">
-    <div>
-      <input type="text" th:name="userName" th:field="*{userName}" placeholder="Login">
-    </div>
-    <div>
-      <input type="text" th:name="password" th:field="*{password}" placeholder="Password", min="5">
-    </div>
-    <div>
-      <input type="text" th:name="name" th:field="*{name}" placeholder="Name">
-    </div>
-    <div>
-      <input type="text" th:name="phoneNumber" th:field="*{phoneNumber}" placeholder="Phone number">
-    </div>
-    <div>
-      <select th:field="*{role}">
-        <option th:each="r: ${roles}"
-                th:text="${r}"
-                th:value="${r}">Role
-        </option>
-      </select>
-    </div>
-    <button type="submit">Create</button><br/>
-  </form>
-  <a th:href="@{/users}">Back</a>
+    <h1>Create User</h1>
+    <form th:action="@{/users}" th:method="POST" th:object="${user}">
+        <div>
+            <input type="text" th:name="userName" th:field="*{userName}" placeholder="Login">
+        </div>
+        <div>
+            <input type="text" th:name="password" th:field="*{password}" placeholder="Password" , min="5">
+        </div>
+        <div>
+            <input type="text" th:name="name" th:field="*{name}" placeholder="Name">
+        </div>
+        <div>
+            <input type="text" th:name="phoneNumber" th:field="*{phoneNumber}" placeholder="Phone number">
+        </div>
+        <div>
+            <select th:field="*{role}">
+                <option th:each="r: ${roles}"
+                        th:text="${r}"
+                        th:value="${r}">Role
+                </option>
+            </select>
+        </div>
+        <button type="submit">Create</button>
+        <br/>
+    </form>
+    <a th:href="@{/users}">Back</a>
 </div>
 </body>
 </html>

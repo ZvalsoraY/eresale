@@ -7,7 +7,6 @@ import first.resale.models.Product;
 import first.resale.service.DealService;
 import first.resale.service.ProductService;
 import first.resale.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -22,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.xml.bind.JAXBException;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("products")
@@ -34,6 +30,7 @@ public class ProductController {
     private final ProductService productService;
     private final DealService dealService;
     private final GetCurrentCursController getCurrentCursController;
+
     public String getCursToRubByName(String name) throws JAXBException, JsonProcessingException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return getCurrentCursController.getCourse(formatter.format(LocalDateTime.now()).toString())
@@ -41,8 +38,7 @@ public class ProductController {
                 .map(inf -> inf.getVunitRate()).findFirst().get();
     }
 
-    public ProductController(UserService userService, ProductService productService, DealService dealService,
-                             GetCurrentCursController getCurrentCursController) {
+    public ProductController(UserService userService, ProductService productService, DealService dealService, GetCurrentCursController getCurrentCursController) {
         this.userService = userService;
         this.productService = productService;
         this.dealService = dealService;
@@ -85,7 +81,6 @@ public class ProductController {
         currentDeal.setId(currentId.getAsLong() + 1);
         currentDeal.setProductId(productId);
         currentDeal.setBuyerId(currentUserId);
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         currentDeal.setDealDate(LocalDateTime.now());
         currentDeal.setDealPrice(currentProduct.getPrice());
         currentDeal.setCurrency(currentProduct.getCurrency());
@@ -93,6 +88,7 @@ public class ProductController {
         dealService.saveDeal(currentDeal);
         return "redirect:/products";
     }
+
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);

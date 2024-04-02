@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="/static/style.css" th:href="@{/style.css}">
-  <meta charset="UTF-8">
-  <title>Products</title>
-  <style>
+    <link rel="stylesheet" href="/static/style.css" th:href="@{/style.css}">
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <style>
     /* Styles for exchange rates */
     .exchange-rates {
       position: absolute;
@@ -15,49 +15,51 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
-   </style>
+
+    </style>
 </head>
 <body>
 <div class="exchange-rates">
-  <h3>Exchange Rates</h3>
-  <ul>
-    <li><strong>USD:</strong> <span th:text="${USD}"></span></li>
-    <li><strong>CNY:</strong> <span th:text="${CNY}"></span></li>
-  </ul>
+    <h3>Exchange Rates</h3>
+    <ul>
+        <li><strong>USD:</strong> <span th:text="${USD}"></span></li>
+        <li><strong>CNY:</strong> <span th:text="${CNY}"></span></li>
+    </ul>
 </div>
 
 <h1>Products list</h1>
 <table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>userId</th>
-    <th>Price</th>
-    <th>Currency</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="product: ${products}">
-    <td th:href="@{/product/{id}(id=${product.getId()})}"
-        th:text="${product.id}">id</td>
-    <td th:text="${product.productName}">productName</td>
-    <td th:text="${product.description}">description</td>
-    <td th:text="${product.userId}">userId</td>
-    <td th:text="${product.price}">price</td>
-    <td th:text="${product.currency}">currency</td>
-    <td>
-      <form th:action="@{/products/buyProduct}" th:method="post">
-        <input type="hidden" name="productId" th:value="${product.id}" />
-        <button type="submit">Buy</button>
-      </form>
-    </td>
-  </tr>
-  </tbody>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>userId</th>
+        <th>Price</th>
+        <th>Currency</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product: ${products}">
+        <td th:href="@{/product/{id}(id=${product.getId()})}"
+            th:text="${product.id}">id
+        </td>
+        <td th:text="${product.productName}">productName</td>
+        <td th:text="${product.description}">description</td>
+        <td th:text="${product.userId}">userId</td>
+        <td th:text="${product.price}">price</td>
+        <td th:text="${product.currency}">currency</td>
+        <td>
+            <form th:action="@{/products/buyProduct}" th:method="post">
+                <input type="hidden" name="productId" th:value="${product.id}"/>
+                <button type="submit">Buy</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
 </table>
 <form th:action="@{/products/create}" th:method="get">
-  <button>Create new product</button>
+    <button>Create new product</button>
 </form>
 
 </body>

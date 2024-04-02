@@ -4,7 +4,6 @@ import first.resale.models.Product;
 import first.resale.repository.ProductRepository;
 import first.resale.repository.UserRepository;
 import first.resale.service.ProductService;
-
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository, UserRepository userRepository){
+    public ProductServiceImpl(ProductRepository productRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
         this.userRepository = userRepository;
     }
