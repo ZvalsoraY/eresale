@@ -3,6 +3,8 @@ package first.resale.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import first.resale.dto.сurrentcurs.ValCurs;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,9 +17,10 @@ import java.io.StringReader;
 
 @RestController
 public class GetCurrentCursController {
-    private final RestTemplate restTemplate = new RestTemplate();
-    private static final String cbrUrl = "http://cbr.ru/scripts/XML_daily.asp?date_req={date}";
-
+    @Autowired
+    private RestTemplate restTemplate;
+    @Value("${cbr-url}")
+    private String cbrUrl;
     @GetMapping(value = "/getCourse")
     @ResponseBody
     public ValCurs getCourse(@RequestParam String date) throws JsonProcessingException, JAXBException {

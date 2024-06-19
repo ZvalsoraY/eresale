@@ -1,3 +1,4 @@
+cbr-url: http://cbr.ru/scripts/XML_daily.asp?date_req={date}
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver

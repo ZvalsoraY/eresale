@@ -78,6 +78,7 @@ public class ProductController {
         Product currentProduct = productService.getProductById(productId);
         Deal currentDeal = new Deal();
         var currentId = dealService.getDeals().stream().mapToLong(Deal::getId).max();
+//        currentDeal.setId(currentId.ifPresentOrElse(v -> currentId.getAsLong(), this::));
         currentDeal.setId(currentId.getAsLong() + 1);
         currentDeal.setProductId(productId);
         currentDeal.setBuyerId(currentUserId);
