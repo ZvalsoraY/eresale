@@ -1,26 +1,19 @@
 package first.resale.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import first.resale.models.Product;
 import first.resale.models.Role;
 import first.resale.models.User;
+import first.resale.models.controller.ProductController;
 import first.resale.service.DealService;
 import first.resale.service.ProductService;
 import first.resale.service.UserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 
-import javax.persistence.Id;
-import javax.xml.bind.JAXBException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 

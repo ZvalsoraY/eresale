@@ -1,4 +1,4 @@
-package first.resale.controller;
+package first.resale.models.controller;
 
 import first.resale.models.Role;
 import first.resale.models.User;

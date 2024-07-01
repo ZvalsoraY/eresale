@@ -1,4 +1,4 @@
-package first.resale.controller;
+package first.resale.models.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import first.resale.models.Currency;

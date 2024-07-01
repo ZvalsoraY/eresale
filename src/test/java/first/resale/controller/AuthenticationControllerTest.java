@@ -1,5 +1,6 @@
 package first.resale.controller;
 
+import first.resale.models.controller.AuthenticationController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

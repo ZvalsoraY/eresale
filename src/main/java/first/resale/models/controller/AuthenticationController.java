@@ -1,4 +1,4 @@
-package first.resale.controller;
+package first.resale.models.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
