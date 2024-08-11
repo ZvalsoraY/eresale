@@ -1,13 +1,13 @@
-cbr-url: http://cbr.ru/scripts/XML_daily.asp?date_req={date}
-spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgresFinal
-    username: postgres
-    password: 1234
-    hikari:
-      maximum-pool-size: 5
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: true
+#cbr-url: http://cbr.ru/scripts/XML_daily.asp?date_req={date}
+#spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/postgresFinal
+#    username: postgres
+#    password: 1234
+#    hikari:
+#      maximum-pool-size: 5
+#  mvc:
+#    hiddenmethod:
+#      filter:
+#        enabled: true

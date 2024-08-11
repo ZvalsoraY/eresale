@@ -1,4 +1,4 @@
-package first.resale.exceptions;
-
-public class NotFoundException extends RuntimeException {
-}
+//package first.resale.exceptions;
+//
+//public class NotFoundException extends RuntimeException {
+//}
