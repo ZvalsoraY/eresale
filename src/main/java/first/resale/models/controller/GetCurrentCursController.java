@@ -23,7 +23,6 @@ public class GetCurrentCursController {
     @Autowired
     private RestTemplate restTemplate;
 
-    //@Autowired
     public GetCurrentCursController(RestTemplateBuilder restTemplateBuilder) {
         RestTemplate restTemplate = restTemplateBuilder
                 .errorHandler(new RestTemplateResponseErrorHandler())
