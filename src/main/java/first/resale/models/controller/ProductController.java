@@ -78,7 +78,6 @@ public class ProductController {
         Product currentProduct = productService.getProductById(productId);
         Deal currentDeal = new Deal();
         var currentId = dealService.getDeals().stream().mapToLong(Deal::getId).max();
-//        currentDeal.setId(currentId.ifPresentOrElse(v -> currentId.getAsLong(), this::));
         currentDeal.setId(currentId.getAsLong() + 1);
         currentDeal.setProductId(productId);
         currentDeal.setBuyerId(currentUserId);
@@ -87,14 +86,12 @@ public class ProductController {
         currentDeal.setCurrency(currentProduct.getCurrency());
         currentDeal.setSellerId(currentProduct.getUserId());
         dealService.saveDeal(currentDeal);
-        return "redirect:/products";
+        return "redirect:/deals";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
+    public String deleteProductById(@PathVariable Long id) {
+        productService.deleteProductById(id);
         return "redirect:/products";
     }
-
-
 }

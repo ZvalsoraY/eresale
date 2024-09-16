@@ -37,6 +37,12 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
+    public Deal getDealById(Long id) {
+        Deal deal = dealRepository.findById(id).orElseThrow(()
+                -> new NoSuchElementException("Deal not found with id: " + id));
+        return deal;
+    }
+    @Override
     public List<Deal> getDealsBySellerId(Long sellerId) {
         return dealRepository.findBySellerId(sellerId);
     }
@@ -46,20 +52,11 @@ public class DealServiceImpl implements DealService {
         return dealRepository.findByBuyerId(buyerId);
     }
 
-    @Override
-    public Deal getDealById(Long id) {
-        var deal = dealRepository.findById(id);
-        if (deal.isPresent()) {
-            return deal.get();
-        } else {
-            throw new NoSuchElementException("Deal not found.");
-        }
-    }
 
     @Override
     public void updateDeal(Long id, Deal updatedDeal) {
         updatedDeal.setId(id);
-        var deal = dealRepository.findById(id).get();
+        var deal = getDealById(id);
         updatedDeal.setSellerId(deal.getSellerId());
         updatedDeal.setBuyerId(deal.getBuyerId());
         updatedDeal.setProductId(deal.getProductId());

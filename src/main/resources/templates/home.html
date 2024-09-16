@@ -4,11 +4,32 @@
     <link rel="stylesheet" href="/css/styles.css">
     <meta charset="UTF-8">
     <title>Start Page</title>
+    <style>
+    /* Styles for exchange rates */
+    .logout {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+<!--      background-color: #f5f5f5;-->
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    </style>
 </head>
 <body>
+<div class="logout">
+    <body>
+    <a th:href="@{/logout}">Logout</a>
+    </body>
+    <a class="nav-link" href="/logout">Выйти</a>
+</div>
 <h2>Welcome to the E-shop</h2>
 Please choose the option:
 <br/>
 <a th:href="@{/products}">Buy</a> or <a th:href="@{/products/create}">Sell</a>
 </body>
+
+
 </html>

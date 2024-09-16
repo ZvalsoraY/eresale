@@ -3,17 +3,16 @@
 <head>
     <link rel="stylesheet" href="/static/styles.css">
     <meta charset="UTF-8">
-    <title>Registration User</title>
+    <title>Update User</title>
 </head>
-
 <body>
-<div class="container">
-    <h1>Create your account.</h1>
-    <form th:action="@{/registration}" th:method="POST" th:object="${userForm}">
-        <div class="item item_1">
+<div>
+    <h1>Update User</h1>
+    <form th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
+        <div>
             <input type="text" th:name="userName" th:field="*{userName}" placeholder="Login">
         </div>
-        <div class="item item_2">
+        <div>
             <input type="text" th:name="password" th:field="*{password}" placeholder="Password" , min="5">
         </div>
         <div>
@@ -22,7 +21,15 @@
         <div>
             <input type="text" th:name="phoneNumber" th:field="*{phoneNumber}" placeholder="Phone number">
         </div>
-        <button type="submit">Register</button>
+        <div>
+            <select th:field="*{role}">
+                <option th:each="r: ${roles}"
+                        th:text="${r}"
+                        th:value="${r}">Role
+                </option>
+            </select>
+        </div>
+        <button type="submit">Update</button>
         <br/>
     </form>
     <a th:href="@{/users}">Back</a>

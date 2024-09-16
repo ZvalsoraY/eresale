@@ -1,41 +1,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="/static/styles.css">
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
     <style>
-    body, html {
+    <!--body, html {
       height: 100%;
       margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
+    }-->
     .container {
-      text-align: center;
+
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
     }
 
 
     </style>
 </head>
 <body>
-<div>
-    <form name="f" th:action="@{/perform-login}" method="post">
+<div class="container">
+    <form name="f" th:action="@{/login}" method="post">
         <fieldset>
-            <legend>Войдите</legend>
+            <legend>Login</legend>
             <div th:if="${param.error}" class="alert alert-error">
-                Неправильные имя и пароль.
+                Incorrect username and password.
             </div>
             <div th:if="${param.logout}" class="alert alert-success">
                 You have been logged out.
             </div>
-            <label for="user">Имя</label>
+            <label for="user">Name</label>
             <input type="text" id="user" name="user"/>
-            <label for="pass">Пароль</label>
+            <label for="pass">Password</label>
             <input type="password" id="pass" name="pass"/>
             <div class="form-actions">
-                <button type="submit" class="btn">Войти</button>
+                <button type="submit" class="btn">Login</button>
             </div>
+            <a th:href="@{/registration}">Register</a>
         </fieldset>
     </form>
 </div>

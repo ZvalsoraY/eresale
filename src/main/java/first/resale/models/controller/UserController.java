@@ -8,18 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
 @RequestMapping("users")
 public class UserController {
-
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -27,48 +24,40 @@ public class UserController {
     }
 
     @GetMapping
-    public String getUsers(Model model) {
+    public String index(Model model) {
         model.addAttribute("users", userService.getUsers());
         return "/user/users";
     }
 
+    @GetMapping("/new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", Role.values());
+        return "/user/new";
+    }
+
     @PostMapping
-    public String createUser(@ModelAttribute User user) {
+    public String create(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/users";
     }
 
-/*    @GetMapping("/{id}")
-    public String getUser(Model model, @PathVariable Long id, HttpServletResponse response) {
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("roles", Role.values());
+        return "user/edit";
+    }
 
-        var user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "/user/profile";
-    }*/
-
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
+        userService.updateUser(id, user);
         return "redirect:/users";
     }
 
-/*    @PutMapping("/{id}")
-    public String updateUser(@PathVariable Long id, @ModelAttribute User user) {
-        userService.updateUser(id, user);
-        return "redirect:/user";
-    }*/
-
-    @GetMapping("/create")
-    public String showCreatePage(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("roles", Role.values());
-        return "/user/create";
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUserById(id);
+        return "redirect:/users";
     }
-
-/*    @GetMapping("/{id}/update")
-    public String showUpdatePage(Model model, @PathVariable Long id) {
-        var user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "/user/update";
-    }*/
 }

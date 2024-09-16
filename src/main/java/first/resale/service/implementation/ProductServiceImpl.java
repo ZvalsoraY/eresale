@@ -2,10 +2,8 @@ package first.resale.service.implementation;
 
 import first.resale.models.Product;
 import first.resale.repository.ProductRepository;
-import first.resale.repository.UserRepository;
 import first.resale.service.ProductService;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,11 +12,10 @@ import java.util.NoSuchElementException;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final UserRepository userRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository, UserRepository userRepository) {
+
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.userRepository = userRepository;
     }
 
     @Override
@@ -34,24 +31,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product getProductById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(()
+                -> new NoSuchElementException("Product not found with id: " + id));
+        return product;
+    }
+
+    @Override
     public List<Product> getProductsByUserId(Long userId) {
         return productRepository.findByUserId(userId);
     }
 
     @Override
-    public Product getProductById(Long id) {
-        var product = productRepository.findById(id);
-        if (product.isPresent()) {
-            return product.get();
-        } else {
-            throw new NoSuchElementException("Product not found.");
-        }
-    }
-
-    @Override
     public void updateProduct(Long id, Product updatedProduct) {
         updatedProduct.setId(id);
-        var product = productRepository.findById(id).get();
+        Product product = getProductById(id);
         updatedProduct.setProductName(product.getProductName());
         updatedProduct.setDescription(product.getDescription());
         updatedProduct.setUserId(product.getId());
@@ -61,7 +55,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Long id) {
+    public void deleteProductById(Long id) {
+        if (getProductById(id) == null) {
+            throw new NoSuchElementException("Produc not found");
+        }
         productRepository.deleteById(id);
     }
 }

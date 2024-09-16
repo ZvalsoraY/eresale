@@ -28,6 +28,14 @@ public class User {
     public User() {
     }
 
+    public User(String userName, String password, String name, String phoneNumber, String role) {
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+    }
+
     public User(Long id, String userName, String password, String name, String phoneNumber, String role) {
         this.id = id;
         this.userName = userName;

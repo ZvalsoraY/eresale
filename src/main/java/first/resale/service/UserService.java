@@ -5,7 +5,7 @@ import first.resale.models.User;
 import java.util.List;
 
 public interface UserService {
-    User saveUser(User user);
+    boolean  saveUser(User user);
 
     List<User> getUsers();
 
@@ -13,7 +13,7 @@ public interface UserService {
 
     void updateUser(Long id, User user);
 
-    void deleteUser(Long id);
+    void deleteUserById(Long id);
 
     User getUserByUserName(String username);
 }

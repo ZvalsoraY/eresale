@@ -99,11 +99,11 @@ public class ProductControllerTest {
     @Test
     void deleteProductTest() {
         var id = 4L;
-        doNothing().when(productService).deleteProduct(4L);
+        doNothing().when(productService).deleteProductById(4L);
 
-        var response = productController.deleteProduct(id);
+        var response = productController.deleteProductById(id);
 
-        verify(productService, times(1)).deleteProduct(4L);
+        verify(productService, times(1)).deleteProductById(4L);
         assertEquals("redirect:/products", response);
     }
 }
