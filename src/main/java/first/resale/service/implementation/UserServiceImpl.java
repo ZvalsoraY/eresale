@@ -27,11 +27,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean  saveUser(User user) {
         User userFromDB = userRepository.findByUserName(user.getUserName());
-
         if (userFromDB != null) {
             return false;
         }
-
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
@@ -48,18 +46,20 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(()
                 -> new NoSuchElementException("User not found with id: " + id));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return user;
     }
 
     @Override
     public void updateUser(Long id, User updatedUser) {
-        //updatedUser.setId(id);
         User user = getUserById(id);
-        updatedUser.setUserName(user.getUserName());
-        updatedUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        updatedUser.setName(user.getName());
-        updatedUser.setPhoneNumber(user.getPhoneNumber());
+        if (bCryptPasswordEncoder.matches(updatedUser.getPassword(),user.getPassword()) ||
+                updatedUser.getPassword().equals(user.getPassword()) ||
+                updatedUser.getPassword().isBlank() ||
+                updatedUser.getPassword() == null) {
+            updatedUser.setPassword(user.getPassword());
+        } else {
+            updatedUser.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+        }
         userRepository.save(updatedUser);
     }
 
