@@ -88,7 +88,7 @@ public class ProductControllerTest {
 
         //Mockito.when(diaryManagementService.getDiaryEntry(id)).thenReturn(diaryEntryResponse);
 
-        assertEquals(SHOW_CREATE_RESULT, productController.showCreatePage(model,userDetails));
+        assertEquals(SHOW_CREATE_RESULT, productController.newProduct(model,userDetails));
     }
     @Test
     void buyProductTest() {

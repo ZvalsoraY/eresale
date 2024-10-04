@@ -1,8 +1,12 @@
 package first.resale.service.implementation;
 
 import first.resale.models.Product;
+import first.resale.models.User;
 import first.resale.repository.ProductRepository;
+import first.resale.repository.UserRepository;
 import first.resale.service.ProductService;
+import first.resale.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +45,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductsByUserId(Long userId) {
         return productRepository.findByUserId(userId);
     }
+/*    @Override
+    public List<Product> getProductsByUser(User user) {
+        return productRepository.findByUser(user);
+    }*/
 
     @Override
     public void updateProduct(Long id, Product updatedProduct) {
@@ -48,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = getProductById(id);
         updatedProduct.setProductName(product.getProductName());
         updatedProduct.setDescription(product.getDescription());
-        updatedProduct.setUserId(product.getId());
+        updatedProduct.setUser(product.getUser());
         updatedProduct.setPrice(product.getPrice());
         updatedProduct.setCurrency(product.getCurrency());
         productRepository.save(updatedProduct);

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,8 +47,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public String getProducts(Model model) throws JAXBException, JsonProcessingException {
-        model.addAttribute("users", userService.getUsers());
+    public String index(Model model) throws JAXBException, JsonProcessingException {
+        //model.addAttribute("users", userService.getUsers());
         model.addAttribute("products", productService.getProducts());
         model.addAttribute("USD", getCursToRubByName("USD"));
         model.addAttribute("CNY", getCursToRubByName("CNY"));
@@ -55,20 +56,41 @@ public class ProductController {
     }
 
 
-    @GetMapping("/create")
-    public String showCreatePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+    @GetMapping("/new")
+    public String newProduct(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("users", userService.getUsers());
         long currentUserId = userService.getUserByUserName(userDetails.getUsername()).getId();
         Product currentProduct = new Product();
-        currentProduct.setUserId(currentUserId);
+        /*currentProduct.setUserId(currentUserId);*/
+        currentProduct.setUser(userService.getUserByUserName(userDetails.getUsername()));
         model.addAttribute("product", currentProduct);
         model.addAttribute("currencies", Currency.values());
-        return "/product/create";
+        return "/product/new";
     }
 
     @PostMapping
-    public String createProduct(@ModelAttribute Product product) {
+    public String create(@ModelAttribute("product") Product product) {
         productService.saveProduct(product);
+        return "redirect:/products";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("product", productService.getProductById(id));
+        model.addAttribute("currencies", Currency.values());
+        return "product/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("product") Product product, @PathVariable("id") Long id) {
+        productService.updateProduct(id, product);
+        return "redirect:/products";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteProductById(@PathVariable Long id) {
+        productService.deleteProductById(id);
         return "redirect:/products";
     }
 
@@ -84,14 +106,9 @@ public class ProductController {
         currentDeal.setDealDate(LocalDateTime.now());
         currentDeal.setDealPrice(currentProduct.getPrice());
         currentDeal.setCurrency(currentProduct.getCurrency());
-        currentDeal.setSellerId(currentProduct.getUserId());
+        /*currentDeal.setSellerId(currentProduct.getUserId());*/
+        currentDeal.setSellerId(currentProduct.getUser().getId());
         dealService.saveDeal(currentDeal);
         return "redirect:/deals";
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteProductById(@PathVariable Long id) {
-        productService.deleteProductById(id);
-        return "redirect:/products";
     }
 }

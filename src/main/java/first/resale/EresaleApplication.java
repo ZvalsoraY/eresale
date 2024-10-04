@@ -38,7 +38,7 @@ public class EresaleApplication {
         SpringApplication.run(EresaleApplication.class, args);
 
 
-        for (User user: userService.getUsers())
+        /*for (User user: userService.getUsers())
         {
             for (Deal deal: dealService.getDealsBySellerId(user.getId())) {
                 dealService.deleteDeal(deal.getId());
@@ -46,20 +46,22 @@ public class EresaleApplication {
             for (Deal deal:  dealService.getDealsByBuyerId(user.getId())) {
                 dealService.deleteDeal(deal.getId());
             }
-            for (Product product: productService.getProductsByUserId(user.getId())){
+            //for (Product product: productService.getProductsByUserId(user.getId())){
+            for (Product product: productService.getProductsByUser(user)){
                 productService.deleteProductById(product.getId());
             }
             userService.deleteUserById(user.getId());
-        }
-        userService.saveUser( new User(10L, "admin", "admin", "admin", "1111", Role.ADMIN.toString()));
-        userService.saveUser(new User(02L, "user", "user", "user", "2222", Role.USER.toString()));
-        userService.saveUser(new User(03L, "user1", "user1", "user1", "22222", Role.USER.toString()));
-        productService.saveProduct( new Product(01L, "Pr user","Product from user", userService.getUserByUserName("user").getId(), 111f, Currency.USD.toString()));
+        }*/
+        userService.saveUser( new User("admin", "admin", "admin", "1111", Role.ADMIN.toString()));
+        userService.saveUser(new User("user", "user", "user", "2222", Role.USER.toString()));
+        userService.saveUser(new User("user1", "user1", "user1", "22222", Role.USER.toString()));
+        productService.saveProduct( new Product("Pr user","Product from user", userService.getUserByUserName("user"), 111f, Currency.USD.toString()));
+        productService.saveProduct( new Product("Pr user1","Product from user1", userService.getUserByUserName("user1"), 101f, Currency.USD.toString()));
         dealService.saveDeal(
-                new Deal(01L
-                        , userService.getUserByUserName("user").getId()
+                new Deal(userService.getUserByUserName("user").getId()
                         , userService.getUserByUserName("user1").getId()
                         , productService.getProductsByUserId(userService.getUserByUserName("user").getId()).stream().findFirst().get().getId()
+                        //, productService.getProductsByUser(userService.getUserByUserName("user")).stream().findFirst().get().getId()
                         , LocalDateTime.now()
                         ,111f
                         , Currency.USD.toString()));

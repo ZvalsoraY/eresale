@@ -31,8 +31,7 @@ public class Deal {
     public Deal() {
     }
 
-    public Deal(long id, long sellerId, long buyerId, long productId, LocalDateTime dealDate, Float dealPrice, String currency) {
-        this.id = id;
+    public Deal(Long sellerId, Long buyerId, Long productId, LocalDateTime dealDate, Float dealPrice, String currency) {
         this.sellerId = sellerId;
         this.buyerId = buyerId;
         this.productId = productId;
@@ -41,35 +40,45 @@ public class Deal {
         this.currency = currency;
     }
 
-    public long getId() {
+    /*public Deal(Long id, Long sellerId, Long buyerId, Long productId, LocalDateTime dealDate, Float dealPrice, String currency) {
+        this.id = id;
+        this.sellerId = sellerId;
+        this.buyerId = buyerId;
+        this.productId = productId;
+        this.dealDate = dealDate;
+        this.dealPrice = dealPrice;
+        this.currency = currency;
+    }*/
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getSellerId() {
+    public Long getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(long sellerId) {
+    public void setSellerId(Long sellerId) {
         this.sellerId = sellerId;
     }
 
-    public long getBuyerId() {
+    public Long getBuyerId() {
         return buyerId;
     }
 
-    public void setBuyerId(long buyerId) {
+    public void setBuyerId(Long buyerId) {
         this.buyerId = buyerId;
     }
 
-    public long getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 

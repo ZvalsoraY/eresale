@@ -1,10 +1,14 @@
 package first.resale.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +29,10 @@ public class User {
     @Column(name = "role", length = 255)
     private String role;
 
+/*    @ManyToOne(fetch = FetchType.LAZY*//*, cascade = CascadeType.ALL*//*)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;*/
+
     public User() {
     }
 
@@ -36,14 +44,14 @@ public class User {
         this.role = role;
     }
 
-    public User(Long id, String userName, String password, String name, String phoneNumber, String role) {
+    /*public User(Long id, String userName, String password, String name, String phoneNumber, String role) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.role = role;
-    }
+    }*/
 
     public Long getId() {
         return id;

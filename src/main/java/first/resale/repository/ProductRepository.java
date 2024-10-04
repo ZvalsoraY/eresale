@@ -1,12 +1,15 @@
 package first.resale.repository;
 
 import first.resale.models.Product;
+import first.resale.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findByUserId(Long userId);
-
-    Product findByProductName(String productName);
+    List<Product> findByUserId(Long user_id);
+//    List<Product> findByUserId(Long userId);
+//    List<Product> findByUser(User user);
+//
+//    Product findByProductName(String productName);
 }
