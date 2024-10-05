@@ -101,7 +101,7 @@ public class ProductControllerTest {
         var id = 4L;
         doNothing().when(productService).deleteProductById(4L);
 
-        var response = productController.deleteProductById(id);
+        var response = productController.deleteProduct(id);
 
         verify(productService, times(1)).deleteProductById(4L);
         assertEquals("redirect:/products", response);

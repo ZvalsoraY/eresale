@@ -8,9 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -23,8 +21,6 @@ public class Product {
     private String productName;
     @Column(name = "description", length = 500, nullable = false)
     private String description;
-/*    @Column(name = "user_id", nullable = false)
-    private Long userId;*/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -32,11 +28,6 @@ public class Product {
     private Float price;
     @Column(name = "currency", length = 255)
     private String currency;
-
-/*    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    private Set<User> user;*/
-/*    @ManyToOne
-    private User user;*/
 
     public Product() {
     }
@@ -48,14 +39,6 @@ public class Product {
         this.price = price;
         this.currency = currency;
     }
-    /*public Product(Long id, String productName, String description, Long userId, Float price, String currency) {
-        this.id = id;
-        this.productName = productName;
-        this.description = description;
-        this.userId = userId;
-        this.price = price;
-        this.currency = currency;
-    }*/
 
     public Long getId() {
         return id;
@@ -81,18 +64,11 @@ public class Product {
         this.description = description;
     }
 
-    /*public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }*/
     public User getUser() {
         return user;
     }
 
-    public void setUser(User seller) {
+    public void setUser(User user) {
         this.user = user;
     }
 

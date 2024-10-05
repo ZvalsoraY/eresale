@@ -40,16 +40,6 @@ public class Deal {
         this.currency = currency;
     }
 
-    /*public Deal(Long id, Long sellerId, Long buyerId, Long productId, LocalDateTime dealDate, Float dealPrice, String currency) {
-        this.id = id;
-        this.sellerId = sellerId;
-        this.buyerId = buyerId;
-        this.productId = productId;
-        this.dealDate = dealDate;
-        this.dealPrice = dealPrice;
-        this.currency = currency;
-    }*/
-
     public Long getId() {
         return id;
     }

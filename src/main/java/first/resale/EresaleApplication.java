@@ -57,6 +57,7 @@ public class EresaleApplication {
         userService.saveUser(new User("user1", "user1", "user1", "22222", Role.USER.toString()));
         productService.saveProduct( new Product("Pr user","Product from user", userService.getUserByUserName("user"), 111f, Currency.USD.toString()));
         productService.saveProduct( new Product("Pr user1","Product from user1", userService.getUserByUserName("user1"), 101f, Currency.USD.toString()));
+        productService.saveProduct( new Product("Pr admin","Product from admin", userService.getUserByUserName("admin"), 1111f, Currency.RUB.toString()));
         dealService.saveDeal(
                 new Deal(userService.getUserByUserName("user").getId()
                         , userService.getUserByUserName("user1").getId()

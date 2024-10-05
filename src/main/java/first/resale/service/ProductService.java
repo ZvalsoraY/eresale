@@ -17,5 +17,5 @@ public interface ProductService {
     void deleteProductById(Long id);
 
     List<Product> getProductsByUserId(Long userId);
-//    List<Product> getProductsByUser(User user);
+
 }

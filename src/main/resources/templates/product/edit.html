@@ -3,12 +3,12 @@
 <head>
     <link rel="stylesheet" href="/css/styles.css">
     <meta charset="UTF-8">
-    <title>Create Product</title>
+    <title>Update Product</title>
 </head>
 <body>
 <div>
-    <h1>Create Product</h1>
-    <form th:action="@{/products}" th:method="POST" th:object="${product}">
+    <h1>Update Product</h1>
+    <form th:method="PATCH" th:action="@{/products/{id}(id=${product.getId()})}" th:object="${product}">
         <input type="text" th:field="*{user}" class="form-control" th:type="hidden" user="product.user"/>
         <div>
             <input type="text" th:name="productName" th:field="*{productName}" placeholder="ProductName">
@@ -27,10 +27,10 @@
                 </option>
             </select>
         </div>
-        <button type="submit">Create</button>
+        <button type="submit">Update</button>
         <br/>
     </form>
-    <form th:action="@{/products}" th:method="get">
+    <form th:action="@{/products}" >
         <button>Products list</button>
     </form>
 </div>

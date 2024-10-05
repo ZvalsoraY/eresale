@@ -48,7 +48,6 @@ public class ProductController {
 
     @GetMapping
     public String index(Model model) throws JAXBException, JsonProcessingException {
-        //model.addAttribute("users", userService.getUsers());
         model.addAttribute("products", productService.getProducts());
         model.addAttribute("USD", getCursToRubByName("USD"));
         model.addAttribute("CNY", getCursToRubByName("CNY"));
@@ -58,10 +57,7 @@ public class ProductController {
 
     @GetMapping("/new")
     public String newProduct(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        model.addAttribute("users", userService.getUsers());
-        long currentUserId = userService.getUserByUserName(userDetails.getUsername()).getId();
         Product currentProduct = new Product();
-        /*currentProduct.setUserId(currentUserId);*/
         currentProduct.setUser(userService.getUserByUserName(userDetails.getUsername()));
         model.addAttribute("product", currentProduct);
         model.addAttribute("currencies", Currency.values());
@@ -76,7 +72,7 @@ public class ProductController {
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("users", userService.getUsers());
+//        model.addAttribute("users", userService.getUsers());
         model.addAttribute("product", productService.getProductById(id));
         model.addAttribute("currencies", Currency.values());
         return "product/edit";
@@ -89,7 +85,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteProductById(@PathVariable Long id) {
+    public String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProductById(id);
         return "redirect:/products";
     }
@@ -106,7 +102,6 @@ public class ProductController {
         currentDeal.setDealDate(LocalDateTime.now());
         currentDeal.setDealPrice(currentProduct.getPrice());
         currentDeal.setCurrency(currentProduct.getCurrency());
-        /*currentDeal.setSellerId(currentProduct.getUserId());*/
         currentDeal.setSellerId(currentProduct.getUser().getId());
         dealService.saveDeal(currentDeal);
         return "redirect:/deals";
