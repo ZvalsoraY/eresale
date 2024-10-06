@@ -1,5 +1,6 @@
 package first.resale.controller;
 
+import first.resale.models.Deal;
 import first.resale.models.Role;
 import first.resale.models.User;
 import first.resale.models.controller.ProductController;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.OptionalLong;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doNothing;
@@ -28,8 +30,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ProductControllerTest {
     private static final String GET_PRODUCTS_RESULT = "/product/products";
-    private static final String SHOW_CREATE_RESULT = "/product/create";
-    private static final String BUY_PRODUCT_RESULT = "redirect:/products";
+    private static final String SHOW_CREATE_RESULT = "/product/new";
+    private static final String BUY_PRODUCT_RESULT = "redirect:/deals";
+    private static final String DELETE_PRODUCT_RESULT = "redirect:/products";
 
     @InjectMocks
     private ProductController productController;
@@ -74,14 +77,14 @@ public class ProductControllerTest {
                 "user2", "user2", new HashSet<>());
         //User user = new User(3L, "testuser", "password", "testuser", "777", Role.USER.toString());
         var users = List.of(
-                new User(4L, "user2", "user2", "user2", "7774", Role.USER.toString()),
-                new User(5L, "testuser5", "password5", "testuser5", "7775", Role.USER.toString()),
-                new User(6L, "testuser6", "password6", "testuser6", "7776", Role.USER.toString()));
+                new User("user2", "user2", "user2", "7774", Role.USER.toString()),
+                new User("testuser5", "password5", "testuser5", "7775", Role.USER.toString()),
+                new User("testuser6", "password6", "testuser6", "7776", Role.USER.toString()));
 
-        doReturn(users).when(userService).getUsers();
+//        doReturn(users).when(userService).getUsers();
 //        doReturn(users.get(1)).when(userService).getUserByUserName(userDetails.getUsername()).getId();
-        when(userService.getUserByUserName("user2")).thenReturn( new User(4L, "user2", "user2", "user2", "7774", Role.USER.toString()));
-        when(userService.getUserByUserName(userDetails.getUsername())).thenReturn( new User(4L, "user2", "user2", "user2", "7774", Role.USER.toString()));
+        when(userService.getUserByUserName("user2")).thenReturn( new User("user2", "user2", "user2", "7774", Role.USER.toString()));
+        when(userService.getUserByUserName(userDetails.getUsername())).thenReturn( new User("user2", "user2", "user2", "7774", Role.USER.toString()));
  //       when(userService.getUserByUserName("user2").getId()).thenReturn(4L);
 //        Product product = new Product(1L,"Prod 1","disc Prod 1",4L, 15.5F,"RUB");
 //        doReturn(product).when().getUsers();
@@ -92,8 +95,9 @@ public class ProductControllerTest {
     }
     @Test
     void buyProductTest() {
-        when(userService.getUserByUserName(userDetails.getUsername())).thenReturn( new User(4L, "user2", "user2", "user2", "7774", Role.USER.toString()));
-        assertEquals(BUY_PRODUCT_RESULT, productController.buyProduct(4L,userDetails));
+        when(userService.getUserByUserName(userDetails.getUsername())).thenReturn( new User("user2", "user2", "user2", "7774", Role.USER.toString()));
+        when(dealService.getDeals().stream().mapToLong(Deal::getId).max()).thenReturn(OptionalLong.of(0L));
+        assertEquals(BUY_PRODUCT_RESULT, productController.buyProduct(1L,userDetails));
     }
 
     @Test
@@ -104,6 +108,6 @@ public class ProductControllerTest {
         var response = productController.deleteProduct(id);
 
         verify(productService, times(1)).deleteProductById(4L);
-        assertEquals("redirect:/products", response);
+        assertEquals(DELETE_PRODUCT_RESULT, response);
     }
 }

@@ -92,7 +92,7 @@ public class ProductController {
 
     @PostMapping("/buyProduct")
     public String buyProduct(@RequestParam("productId") Long productId, @AuthenticationPrincipal UserDetails userDetails) {
-        long currentUserId = userService.getUserByUserName(userDetails.getUsername()).getId();
+        Long currentUserId = userService.getUserByUserName(userDetails.getUsername()).getId();
         Product currentProduct = productService.getProductById(productId);
         Deal currentDeal = new Deal();
         var currentId = dealService.getDeals().stream().mapToLong(Deal::getId).max();
