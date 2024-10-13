@@ -1,6 +1,6 @@
 package first.resale.handlers;
 
-import first.resale.exceptions.ExchangeRateUnavailableException;
+import first.resale.exception.ExchangeRateUnavailableException;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResponseErrorHandler;

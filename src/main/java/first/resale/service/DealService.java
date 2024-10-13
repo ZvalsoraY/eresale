@@ -17,5 +17,5 @@ public interface DealService {
 
     void updateDeal(Long id, Deal deal);
 
-    void deleteDeal(Long id);
+    void deleteDealById(Long id);
 }
