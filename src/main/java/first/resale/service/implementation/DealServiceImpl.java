@@ -1,5 +1,6 @@
 package first.resale.service.implementation;
 
+import first.resale.exception.NotFoundException;
 import first.resale.models.Deal;
 import first.resale.repository.DealRepository;
 import first.resale.repository.ProductRepository;
@@ -14,14 +15,14 @@ import java.util.NoSuchElementException;
 @Service
 public class DealServiceImpl implements DealService {
     private final DealRepository dealRepository;
-    private final ProductRepository productRepository;
-    private final UserRepository userRepository;
+/*    private final ProductRepository productRepository;
+    private final UserRepository userRepository;*/
 
-    public DealServiceImpl(ProductRepository productRepository, UserRepository userRepository,
-                           DealRepository dealRepository) {
+    public DealServiceImpl(/*ProductRepository productRepository, UserRepository userRepository,
+                           */DealRepository dealRepository) {
         this.dealRepository = dealRepository;
-        this.productRepository = productRepository;
-        this.userRepository = userRepository;
+/*        this.productRepository = productRepository;
+        this.userRepository = userRepository;*/
     }
 
     @Override
@@ -39,7 +40,7 @@ public class DealServiceImpl implements DealService {
     @Override
     public Deal getDealById(Long id) {
         Deal deal = dealRepository.findById(id).orElseThrow(()
-                -> new NoSuchElementException("Deal not found with id: " + id));
+                ->  new NotFoundException("Deal was not found.")); //new NoSuchElementException("Deal not found with id: " + id));
         return deal;
     }
     @Override
@@ -68,6 +69,7 @@ public class DealServiceImpl implements DealService {
 
     @Override
     public void deleteDealById(Long id) {
+        getDealById(id);
         dealRepository.deleteById(id);
     }
 }

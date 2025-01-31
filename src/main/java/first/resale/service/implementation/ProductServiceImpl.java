@@ -1,5 +1,6 @@
 package first.resale.service.implementation;
 
+import first.resale.exception.NotFoundException;
 import first.resale.models.Product;
 import first.resale.models.User;
 import first.resale.repository.ProductRepository;
@@ -37,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(()
-                -> new NoSuchElementException("Product not found with id: " + id));
+                ->  new NotFoundException("Product was not found.")); //new NoSuchElementException("Product not found with id: " + id));
         return product;
     }
 
@@ -48,15 +49,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(Long id, Product updatedProduct) {
+        getProductById(id);
         updatedProduct.setId(id);
         productRepository.save(updatedProduct);
     }
 
     @Override
     public void deleteProductById(Long id) {
-        if (getProductById(id) == null) {
+        getProductById(id);
+        /*if (getProductById(id) == null) {
             throw new NoSuchElementException("Produc not found");
-        }
+        }*/
         productRepository.deleteById(id);
     }
 }

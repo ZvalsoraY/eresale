@@ -1,5 +1,6 @@
 package first.resale.service.implementation;
 
+import first.resale.exception.NotFoundException;
 import first.resale.models.User;
 import first.resale.repository.UserRepository;
 import first.resale.service.UserService;
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(()
-                -> new NoSuchElementException("User not found with id: " + id));
+                ->  new NotFoundException("User was not found.")); //-> new NoSuchElementException("User not found with id: " + id));
         return user;
     }
 
@@ -65,9 +66,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserById(Long id) {
-        if (getUserById(id) == null) {
+        getUserById(id);
+        /*if (getUserById(id) == null) {
             throw new NoSuchElementException("User not found");
-        }
+        }*/
         userRepository.deleteById(id);
     }
 
@@ -75,7 +77,7 @@ public class UserServiceImpl implements UserService {
     public User getUserByUserName(String username) {
         var user = userRepository.findByUserName(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+            throw new NotFoundException("User was not found."); //UsernameNotFoundException("User not found");
         }
         return user;
     }

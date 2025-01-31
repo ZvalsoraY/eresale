@@ -9,10 +9,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class AuthenticationControllerTest {
-    private static final String AUTHENTICATION_CONTROLLER_RESULT = "/authentication/login";
+    private static final String GET_RESULT_EXPECTED = "/authentication/login";
 
     @InjectMocks
     private AuthenticationController authenticationController;
@@ -21,7 +22,8 @@ public class AuthenticationControllerTest {
 
     @Test
     void getTest() {
-        assertEquals(AUTHENTICATION_CONTROLLER_RESULT, authenticationController.get(model));
+        assertEquals(GET_RESULT_EXPECTED, authenticationController.get(model));
+        verify(model).addAttribute("title", "Форма входа");
     }
 
 }

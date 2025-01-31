@@ -4,7 +4,6 @@ package first.resale.models.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import first.resale.dto.сurrentcurs.ValCurs;
 import first.resale.handlers.RestTemplateResponseErrorHandler;
-//import first.resale.handlers.RestTemplateResponseErrorHandler1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;

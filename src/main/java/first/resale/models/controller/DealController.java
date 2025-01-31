@@ -20,7 +20,6 @@ public class DealController {
     @GetMapping
     public String getDeals(Model model) {
         model.addAttribute("deals", dealService.getDeals());
-
         return "/deal/deals";
     }
 
